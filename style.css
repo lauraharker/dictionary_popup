@@ -1,0 +1,21 @@
+p {
+    font-family: sans-serif;
+    font-size: small;
+}
+
+#acknowledgment {
+    font-size: smaller;
+}
+
+a {
+    text-decoration: none;
+}
+
+a.hover {
+    text-decoration: underline;
+}
+
+#defField {
+    font-family : sans-serif;
+    font-size : small;
+}
