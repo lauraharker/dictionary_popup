@@ -39,7 +39,6 @@ function parseXML(data) {
         var $entry = $(this);
         var word = $entry.find("ew").text();
         word = capitalize(word);
-        console.log("Word: " + word);
         var meanings = "";
         $entry.find("def").find("dt").each(function() {
             var $def = $(this);
@@ -48,6 +47,7 @@ function parseXML(data) {
         var text = word + "<br><ol>" + meanings + "</ol>";
         $("<li></li>").html(text).appendTo("#defField ul");
     });
+    $("#defField ul ul").remove();
 }
 
 $( document ).keydown(function(event) {
