@@ -19,3 +19,9 @@ a.hover {
     font-family : sans-serif;
     font-size : small;
 }
+ul {
+    padding: 0;
+}
+ol {
+    padding: 0;
+}
