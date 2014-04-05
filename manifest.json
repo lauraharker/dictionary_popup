@@ -13,5 +13,9 @@
         "default_icon": "images/icon.png",
         "default_title": "Dictionary",
         "default_popup": "popup.html"
-    }
+    },
+
+    "permissions": [
+        "http://glosbe.com"
+    ]
 }

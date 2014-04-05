@@ -1,32 +1,49 @@
-//var f = "";
-//var word = "hi";
-//var capitals = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-//var lowerCase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+var f = "";
+var word = "hi";
+var ctrlDown = false, altDown = false;
+var capitals = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+var lowerCase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-//function fillDefinition(parsed_json) {
+function fillDefinition(parsed_json) {
     //$("#defField").html(parsed_json.phrase);
     //alert('Did that work?');
 }
-var ctrlDown = false, altDown = false;
 
 
 $( document ).ready( function() {
-    
+    //$("#defField").html("hi");
     $("#mainform").submit(function(e) {
+        $("#defField").html("Getting definitions...");
         e.preventDefault();
-        $.ajax({
-        url : "http://glosbe.com/gapi/translate?from=eng&dest=eng&format=json&phrase=" + $.trim($("#word").val()) + "&pretty=true",
-        dataType: "jsonp",
-        jsonp: 'callback',
-    jsonpCallback: 'jsonpCallback'
-        //success : function(data) {
-            //jsonpCallback(data);
-        //}
-        });
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = handler;
+        xhr.open("GET", "http://glosbe.com/gapi/translate?from=eng&dest=eng&format=json&phrase=" + $.trim($("#word").val()) + "&pretty=true");
+        xhr.send();
+        //$.ajax({
+        //url : "http://glosbe.com/gapi/translate?from=eng&dest=eng&format=json&phrase=" + $.trim($("#word").val()) + "&pretty=true",
+        //dataType: "jsonp",
+        ////jsonp: 'callback',
+        //jsonpCallback: 'jsonpCallback'
+        ////success : function(data) {
+            ////jsonpCallback(data);
+        ////}
+        //});
     });
 });
 
-function jsonpCallback(data) {
+function handler() {
+    if(this.readyState == this.DONE) {
+        if(this.status == 200 &&
+                this.responseXML != null) {
+            var data = JSON.parse(this.responseXML);
+            processGlosbe(data);
+            return;
+        }
+    }
+    $("#defField").html("Error getting definition. Sorry!");
+}
+
+function processGlosbe(data) {
     var entry = capitalize(data.phrase);
     $("#defField").html(entry + "<br><ol></ol>");
     $(data.tuc).each(function(index, value) {
@@ -73,18 +90,8 @@ $(document).keyup( function(event) {
 });
 
 
-function yep() {
-    $.ajax({
-        dataType : jsonp,
-        url : "http://glosbe.com/gapi/translate?from=eng&dest=eng&format=json&phrase=hi&pretty=true",
-        success : function(parsed_json) {
-        alert('you did it');
-    }
-});
-}
-
 function capitalize(word) {
-    if(typeof word == "string" && word.length > 0) {
+    if(typeof word == "string") {
         return word.charAt(0).toUpperCase() + word.substring(1);
     } else {
         return word;
