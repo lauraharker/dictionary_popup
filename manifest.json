@@ -3,19 +3,15 @@
     "name": "Dictionary",
     "version": "1.0",
 
-    "description": "Pop-up dictionary linked to glosbe.com",
-
-    //"icons": {
-        //"128": "images/icon.png"
-    //}
+    "description": "Pop-up dictionary using Merriam-Webster",
 
     "browser_action": {
-        "default_icon": "images/icon.png",
+        "default_icon": "images/mw_logo.png",
         "default_title": "Dictionary",
         "default_popup": "popup.html"
     },
 
     "permissions": [
-        "http://glosbe.com"
+        "http://www.dictionaryapi.com/"
     ]
 }
