@@ -1,12 +1,3 @@
-//var f = "";
-//var word = "hi";
-//var capitals = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-//var lowerCase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-
-//function fillDefinition(parsed_json) {
-    //$("#defField").html(parsed_json.phrase);
-    //alert('Did that work?');
-}
 var ctrlDown = false, altDown = false;
 
 
@@ -19,9 +10,6 @@ $( document ).ready( function() {
         dataType: "jsonp",
         jsonp: 'callback',
     jsonpCallback: 'jsonpCallback'
-        //success : function(data) {
-            //jsonpCallback(data);
-        //}
         });
     });
 });
@@ -73,15 +61,6 @@ $(document).keyup( function(event) {
 });
 
 
-function yep() {
-    $.ajax({
-        dataType : jsonp,
-        url : "http://glosbe.com/gapi/translate?from=eng&dest=eng&format=json&phrase=hi&pretty=true",
-        success : function(parsed_json) {
-        alert('you did it');
-    }
-});
-}
 
 function capitalize(word) {
     if(typeof word == "string" && word.length > 0) {
