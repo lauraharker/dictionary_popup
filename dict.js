@@ -72,15 +72,6 @@ function parseXML(data) {
     });
 }
 
-function contains(item, array) {
-    $(array).each(function (key, value) {
-        if(String(item) === String(value)) {
-            return true;
-        }
-    });
-    return false;
-}
-
 $( document ).keydown(function(event) {
     if(event.which == 17 ) { 
         ctrlDown = true;
@@ -118,7 +109,6 @@ $(document).keyup( function(event) {
 
 
 function capitalize(word) {
-    //alert("Capitalize this!");
     if(typeof word == "string") {
         return word.charAt(0).toUpperCase() + word.substring(1);
     } else {
